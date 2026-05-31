@@ -657,11 +657,33 @@
         CURVBENCH spans natural graphs and table-derived graphs, then evaluates models through the lens of geometry-conditioned inductive bias rather than a single aggregate score.
       </p>
 
+
       <div class="grid grid-4">
         <div class="stat-card"><span class="stat-number"><em>14</em></span><span class="stat-label">relational datasets</span></div>
         <div class="stat-card"><span class="stat-number"><em>18</em></span><span class="stat-label">models and GFMs</span></div>
         <div class="stat-card"><span class="stat-number"><em>3</em>+1</span><span class="stat-label">curvature views</span></div>
       </div>
+
+      <!-- 曲率分布柱状图栏目 -->
+      <section id="curvatures" class="container" style="margin-top:40px;">
+        <span class="section-kicker">Curvature Distribution</span>
+        <h2 class="section-title">Curvature distributions of three representative datasets</h2>
+        <p class="section-lead">The histograms below show the node-level curvature distributions for Citeseer (near-zero), Actor (positive), and Disease (negative). These illustrate the geometric basis for our regime classification.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
+          <div style="flex:1 1 320px; min-width:320px; max-width:400px;">
+            <canvas id="curv-citeseer"></canvas>
+            <div style="text-align:center; margin-top:8px; color:#687083; font-weight:700;">Citeseer (near-zero)</div>
+          </div>
+          <div style="flex:1 1 320px; min-width:320px; max-width:400px;">
+            <canvas id="curv-actor"></canvas>
+            <div style="text-align:center; margin-top:8px; color:#687083; font-weight:700;">Actor (positive)</div>
+          </div>
+          <div style="flex:1 1 320px; min-width:320px; max-width:400px;">
+            <canvas id="curv-disease"></canvas>
+            <div style="text-align:center; margin-top:8px; color:#687083; font-weight:700;">Disease (negative)</div>
+          </div>
+        </div>
+      </section>
 
       <div class="table-card">
         <div class="table-card-header">
@@ -848,7 +870,56 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    // 加载并绘制曲率分布直方图
+    function loadAndDrawCurvChart(canvasId, jsonFile, color) {
+      fetch(jsonFile)
+        .then(r => r.json())
+        .then(data => {
+          // 计算每个bin的中心
+          const bins = data.bins;
+          const centers = [];
+          for (let i = 0; i < bins.length - 1; ++i) {
+            centers.push(((bins[i] + bins[i+1]) / 2).toFixed(3));
+          }
+          new Chart(document.getElementById(canvasId), {
+            type: 'bar',
+            data: {
+              labels: centers,
+              datasets: [{
+                label: 'Count',
+                data: data.hist,
+                backgroundColor: color,
+                borderRadius: 4,
+                maxBarThickness: 18
+              }]
+            },
+            options: {
+              plugins: {
+                legend: { display: false }
+              },
+              scales: {
+                x: {
+                  title: { display: true, text: 'Curvature', color: '#687083', font: { weight: 700 } },
+                  ticks: { color: '#687083', maxRotation: 60, minRotation: 60, font: { size: 11 } }
+                },
+                y: {
+                  title: { display: true, text: 'Count', color: '#687083', font: { weight: 700 } },
+                  ticks: { color: '#687083', font: { size: 11 } },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        });
+    }
+    // 页面加载后绘制三个直方图
+    window.addEventListener('DOMContentLoaded', function() {
+      loadAndDrawCurvChart('curv-citeseer', 'curv_citeseer.json', '#596de8');
+      loadAndDrawCurvChart('curv-actor', 'curv_actor.json', '#d8893a');
+      loadAndDrawCurvChart('curv-disease', 'curv_disease.json', '#3a9d6b');
+    });
     function copyBibtex() {
       const text = document.getElementById('bibtex').innerText;
       navigator.clipboard.writeText(text).then(() => {
