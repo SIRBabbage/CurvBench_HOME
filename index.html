@@ -260,6 +260,7 @@
 
     .grid { display: grid; gap: 18px; }
     .grid-4 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .overview-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
     .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
     .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .card {
@@ -595,7 +596,7 @@
         CURVBENCH shows that such aggregation can hide geometry-dependent trade-offs:
         a model may look globally strong only because the benchmark mixture favors its preferred curvature regime.
       </p>
-      <div class="grid grid-4">
+      <div class="grid grid-4 overview-grid">
         <article class="card lift">
           <div class="icon">🧭</div>
           <h3>Curvature-aware partitioning</h3>
