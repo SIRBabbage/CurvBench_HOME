@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CURVBENCH project page: curvature-stratified evaluation for relational learning." />
+  <title>CURVBENCH | Curvature-Stratified Evaluation of Relational Learning</title>
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --bg-soft: #f3f0ea;
+      --card: rgba(255, 255, 255, 0.82);
+      --text: #1f2937;
+      --muted: #5b6472;
+      --line: rgba(31, 41, 55, 0.12);
+      --primary: #5b6ee1;
+      --primary-dark: #3d4fc0;
+      --accent: #d78b45;
+      --green: #4f9d69;
+      --red: #ca5b5b;
+      --shadow: 0 20px 60px rgba(31, 41, 55, 0.10);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(91, 110, 225, 0.18), transparent 28rem),
+        radial-gradient(circle at 90% 10%, rgba(215, 139, 69, 0.18), transparent 24rem),
+        linear-gradient(180deg, #fbfaf7 0%, #f7f3ed 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(251, 250, 247, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 8px 28px rgba(91, 110, 225, 0.30);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.80);
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: var(--primary-dark); }
+
+    .hero {
+      padding: 70px 0 42px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid rgba(91, 110, 225, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      margin: 0 auto 20px;
+      max-width: 980px;
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 2vw, 23px);
+      color: var(--muted);
+      max-width: 850px;
+      margin: 0 auto 26px;
+    }
+
+    .authors, .affiliations {
+      max-width: 940px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .authors a {
+      color: var(--primary-dark);
+      font-weight: 700;
+      border-bottom: 1px dotted rgba(61, 79, 192, 0.55);
+    }
+
+    .authors strong { color: var(--text); }
+
+    .equal-note {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 17px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--text);
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(31, 41, 55, 0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(91, 110, 225, 0.40);
+      box-shadow: 0 14px 32px rgba(31, 41, 55, 0.10);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+    }
+
+    .teaser {
+      margin: 34px auto 0;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3vw, 30px);
+      overflow: hidden;
+    }
+
+    .teaser svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption {
+      margin: 14px auto 0;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+      margin: 0 0 14px;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 860px;
+      margin: 0 0 26px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 16px 40px rgba(31, 41, 55, 0.07);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--bg-soft);
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      font-size: 19px;
+    }
+
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(91, 110, 225, 0.10);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .method-panel {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .equation {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #191f2d;
+      color: #f7f7fb;
+      border-radius: 18px;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .metric {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .metric:last-child { border-bottom: none; }
+
+    .metric-number {
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      color: var(--primary-dark);
+      min-width: 86px;
+    }
+
+    .metric-label { color: var(--muted); font-weight: 650; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: rgba(243, 240, 234, 0.82);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .regime {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 850;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+    }
+
+    .regime.zero { background: rgba(91, 110, 225, 0.12); color: var(--primary-dark); }
+    .regime.pos { background: rgba(215, 139, 69, 0.15); color: #9a5d22; }
+    .regime.neg { background: rgba(79, 157, 105, 0.15); color: #2d7447; }
+    .regime.tail { background: rgba(202, 91, 91, 0.14); color: #9a3737; }
+
+    .result-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .result {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--line);
+    }
+
+    .result strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .result span { color: var(--muted); font-size: 14px; }
+
+    .bibtex {
+      position: relative;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #191f2d;
+      color: #f7f7fb;
+      padding: 22px;
+      border-radius: 20px;
+      overflow: auto;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .copy-btn {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .footer {
+      padding: 34px 0 50px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer a { color: var(--primary-dark); font-weight: 800; }
+
+    @media (max-width: 880px) {
+      .nav-links { display: none; }
+      .grid-4, .grid-3, .grid-2, .method-panel, .result-strip { grid-template-columns: 1fr; }
+      .hero { padding-top: 48px; }
+      .metric-number { min-width: 72px; font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="CURVBENCH home">
+        <span class="brand-mark"></span>
+        <span>CURVBENCH</span>
+      </a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#results">Results</a>
+        <a href="#resources">Resources</a>
+        <a href="#citation">Citation</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero container">
+      <div class="eyebrow">🌐 Curvature-Stratified Relational Learning Benchmark</div>
+      <h1>The Post-GCN Decade Revisited</h1>
+      <p class="subtitle">
+        A geometry-aware evaluation framework showing that relational learning performance is not universal:
+        model rankings remain stable within curvature regimes, but shift sharply across them.
+      </p>
+
+      <p class="authors">
+        <strong>Shuo Wang</strong><sup>1,4,*</sup>, Xiangyu Wang<sup>1,*</sup>, Quanxin Wang<sup>1</sup>,
+        Bolin Wu<sup>1</sup>, Bokui Wang<sup>1</sup>, Shunyang Huang<sup>1</sup>, Boyan Deng<sup>1</sup>,
+        Haonan Liu<sup>1</sup>, Ruiyi Fang<sup>2</sup>, Zhenxiang Xu<sup>1,3</sup>, Boyu Wang<sup>2</sup>, Zhao Kang<sup>1,†</sup>
+      </p>
+      <p class="affiliations">
+        <sup>1</sup>UESTC &nbsp; <sup>2</sup>Western University &nbsp; <sup>3</sup>Zhejiang University &nbsp; <sup>4</sup>Tsinghua University
+      </p>
+      <p class="equal-note">* Equal contribution &nbsp; † Corresponding author</p>
+
+      <div class="buttons">
+        <a class="btn primary" href="https://arxiv.org/abs/REPLACE_WITH_ARXIV_ID" target="_blank" rel="noopener">📄 arXiv</a>
+        <a class="btn" href="paper.pdf" target="_blank" rel="noopener">🧾 PDF</a>
+        <a class="btn" href="https://github.com/REPLACE_WITH_REPO" target="_blank" rel="noopener">💻 Code</a>
+        <a class="btn" href="https://huggingface.co/datasets/REPLACE_WITH_DATASET" target="_blank" rel="noopener">🤗 Dataset</a>
+        <a class="btn" href="https://huggingface.co/REPLACE_WITH_MODELS" target="_blank" rel="noopener">🚀 Models</a>
+      </div>
+
+      <div class="teaser" aria-label="CURVBENCH teaser visualization">
+        <svg viewBox="0 0 1120 430" role="img" aria-labelledby="teaserTitle teaserDesc">
+          <title id="teaserTitle">CURVBENCH curvature-stratified evaluation teaser</title>
+          <desc id="teaserDesc">An illustrative pipeline from datasets to curvature regimes to regime-conditioned model rankings.</desc>
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#5b6ee1" stop-opacity="0.95" />
+              <stop offset="1" stop-color="#d78b45" stop-opacity="0.95" />
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#1f2937" flood-opacity="0.14" />
+            </filter>
+          </defs>
+          <rect x="0" y="0" width="1120" height="430" rx="28" fill="#f9f6ef" />
+          <text x="54" y="60" font-size="28" font-weight="800" fill="#1f2937">From flat leaderboards to curvature-conditioned diagnostics</text>
+          <text x="54" y="92" font-size="16" fill="#5b6472">CURVBENCH separates relational datasets by intrinsic geometry before comparing models.</text>
+
+          <g filter="url(#shadow)">
+            <rect x="54" y="132" width="260" height="210" rx="24" fill="#ffffff" />
+            <text x="84" y="174" font-size="20" font-weight="800" fill="#1f2937">Relational datasets</text>
+            <circle cx="117" cy="235" r="12" fill="#5b6ee1" />
+            <circle cx="172" cy="206" r="12" fill="#d78b45" />
+            <circle cx="220" cy="254" r="12" fill="#4f9d69" />
+            <circle cx="256" cy="215" r="12" fill="#ca5b5b" />
+            <line x1="117" y1="235" x2="172" y2="206" stroke="#9aa2b4" stroke-width="3" />
+            <line x1="172" y1="206" x2="220" y2="254" stroke="#9aa2b4" stroke-width="3" />
+            <line x1="220" y1="254" x2="256" y2="215" stroke="#9aa2b4" stroke-width="3" />
+            <line x1="117" y1="235" x2="220" y2="254" stroke="#9aa2b4" stroke-width="3" />
+            <text x="84" y="304" font-size="14" fill="#5b6472">Graphs + table-derived graphs</text>
+          </g>
+
+          <path d="M334 236 C376 236 386 236 428 236" fill="none" stroke="#c7cbd5" stroke-width="5" stroke-linecap="round" />
+          <path d="M418 224 L434 236 L418 248" fill="none" stroke="#c7cbd5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+
+          <g filter="url(#shadow)">
+            <rect x="454" y="112" width="280" height="250" rx="24" fill="#ffffff" />
+            <text x="484" y="154" font-size="20" font-weight="800" fill="#1f2937">Curvature strata</text>
+            <rect x="484" y="185" width="220" height="38" rx="19" fill="#eef0ff" />
+            <text x="506" y="210" font-size="14" font-weight="800" fill="#3d4fc0">Near-zero geometry</text>
+            <rect x="484" y="238" width="220" height="38" rx="19" fill="#fff0df" />
+            <text x="506" y="263" font-size="14" font-weight="800" fill="#9a5d22">Positive curvature</text>
+            <rect x="484" y="291" width="220" height="38" rx="19" fill="#e8f6ee" />
+            <text x="506" y="316" font-size="14" font-weight="800" fill="#2d7447">Negative curvature</text>
+          </g>
+
+          <path d="M754 236 C796 236 806 236 848 236" fill="none" stroke="#c7cbd5" stroke-width="5" stroke-linecap="round" />
+          <path d="M838 224 L854 236 L838 248" fill="none" stroke="#c7cbd5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+
+          <g filter="url(#shadow)">
+            <rect x="874" y="112" width="194" height="250" rx="24" fill="#ffffff" />
+            <text x="904" y="154" font-size="20" font-weight="800" fill="#1f2937">Rank shifts</text>
+            <rect x="904" y="188" width="44" height="44" rx="10" fill="#5b6ee1" opacity="0.86" />
+            <rect x="956" y="188" width="44" height="44" rx="10" fill="#d78b45" opacity="0.80" />
+            <rect x="1008" y="188" width="44" height="44" rx="10" fill="#4f9d69" opacity="0.82" />
+            <rect x="904" y="240" width="44" height="44" rx="10" fill="#d78b45" opacity="0.62" />
+            <rect x="956" y="240" width="44" height="44" rx="10" fill="#4f9d69" opacity="0.86" />
+            <rect x="1008" y="240" width="44" height="44" rx="10" fill="#5b6ee1" opacity="0.72" />
+            <rect x="904" y="292" width="44" height="44" rx="10" fill="#4f9d69" opacity="0.68" />
+            <rect x="956" y="292" width="44" height="44" rx="10" fill="#5b6ee1" opacity="0.68" />
+            <rect x="1008" y="292" width="44" height="44" rx="10" fill="#d78b45" opacity="0.90" />
+          </g>
+
+          <rect x="54" y="374" width="1014" height="1" fill="#ded8cf" />
+          <text x="54" y="405" font-size="14" fill="#5b6472">Key message: the best model depends on the curvature regime, task, metric, and feasibility constraints.</text>
+        </svg>
+      </div>
+      <p class="caption">
+        A static project page template for GitHub Pages. Replace the placeholder links with your arXiv, PDF, GitHub, Hugging Face dataset, and model URLs.
+      </p>
+    </header>
+
+    <section id="overview" class="container">
+      <h2 class="section-title">Overview</h2>
+      <p class="section-lead">
+        Existing graph and relational-learning benchmarks often compress heterogeneous datasets into a single flat leaderboard.
+        CURVBENCH asks a sharper question: do models generalize across intrinsic geometries, or only within the regimes that match their inductive biases?
+      </p>
+      <div class="grid grid-4">
+        <article class="card">
+          <div class="icon">🧭</div>
+          <h3>Geometry-aware evaluation</h3>
+          <p>Datasets are partitioned into near-zero, positive, and negative curvature regimes using curvature statistics.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📊</div>
+          <h3>Regime-conditioned rankings</h3>
+          <p>Model comparisons are reported within each geometric regime, reducing misleading conclusions from global averages.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🧪</div>
+          <h3>Broad model coverage</h3>
+          <p>The benchmark spans Euclidean GNNs, hyperbolic models, mixed-curvature methods, adaptive Riemannian models, and GFMs.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🔁</div>
+          <h3>Reproducible protocol</h3>
+          <p>Code, splits, evaluation tools, and diagnostic scripts are designed to support rigorous relational-learning assessment.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="method" class="container">
+      <h2 class="section-title">Method</h2>
+      <p class="section-lead">
+        CURVBENCH treats graphs as finite metric spaces and summarizes their intrinsic geometry through node-level midpoint curvature residuals.
+      </p>
+      <div class="method-panel">
+        <div class="card">
+          <h3>Curvature residual</h3>
+          <p>
+            For a center node <em>m</em>, neighbor pair <em>{b,c}</em>, and anchor node <em>a</em>, the midpoint residual measures deviation from Euclidean midpoint geometry.
+            Graph-level curvature is summarized by mean curvature and skewness, which together reveal both average geometry and tail-driven asymmetry.
+          </p>
+          <div class="pill-row">
+            <span class="pill">mean curvature</span>
+            <span class="pill">curvature skewness</span>
+            <span class="pill">partial-order ranking</span>
+            <span class="pill">within/cross regime gap</span>
+          </div>
+        </div>
+        <div class="equation">
+ξ<sub>G</sub>(a,b,c;m) = [ d<sub>G</sub>(a,m)<sup>2</sup> + 1/4 d<sub>G</sub>(b,c)<sup>2</sup><br/>
+&nbsp;&nbsp;− 1/2( d<sub>G</sub>(a,b)<sup>2</sup> + d<sub>G</sub>(a,c)<sup>2</sup> ) ] / [ 2d<sub>G</sub>(a,m) ]<br/><br/>
+κ̄(G) = mean node curvature<br/>
+γ<sub>κ</sub>(G) = curvature skewness
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmark" class="container">
+      <h2 class="section-title">Benchmark</h2>
+      <p class="section-lead">
+        CURVBENCH evaluates 18 representative models across 14 relational datasets, including natural graphs and table-derived graphs.
+      </p>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="metric"><span class="metric-number">14</span><span class="metric-label">datasets across natural and table-derived graphs</span></div>
+          <div class="metric"><span class="metric-number">18</span><span class="metric-label">representative relational-learning models</span></div>
+          <div class="metric"><span class="metric-number">3+</span><span class="metric-label">curvature regimes plus tail-driven table graphs</span></div>
+        </article>
+        <article class="card">
+          <h3>Model families</h3>
+          <p>MLP, GCN, GAT, GraphSAGE, PCNet, HGNN, HGCN, HAT, HyboNet, QGCN, CUSP, GraphMoRE, GCOPE, MDGPT, MDGFM, SAMGPT, GraphGluing, SA2GFM.</p>
+        </article>
+        <article class="card">
+          <h3>Evaluation lens</h3>
+          <p>Rather than asking which model is globally best, CURVBENCH asks which inductive bias is reliable under each intrinsic geometry.</p>
+        </article>
+      </div>
+
+      <div class="table-wrap" style="margin-top: 20px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Regime</th>
+              <th>Representative datasets</th>
+              <th>Geometric signal</th>
+              <th>Diagnostic value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="regime zero">● Near-zero</span></td>
+              <td>Cora, Citeseer, PubMed</td>
+              <td>Balanced curvature profile</td>
+              <td>Tests whether flat aggregation and spectral filtering are sufficient.</td>
+            </tr>
+            <tr>
+              <td><span class="regime pos">● Positive</span></td>
+              <td>Cornell, Airport, Actor</td>
+              <td>Compact or clustered geometry</td>
+              <td>Reveals when node attributes and local clustering dominate.</td>
+            </tr>
+            <tr>
+              <td><span class="regime neg">● Negative</span></td>
+              <td>Disease, Telecom, CS_Phds</td>
+              <td>Hierarchical or tree-like geometry</td>
+              <td>Evaluates whether non-Euclidean or adaptive models reduce mismatch.</td>
+            </tr>
+            <tr>
+              <td><span class="regime tail">● Table-derived</span></td>
+              <td>Carcinogenesis, Hepatitis, PTE, Toxicology, F1</td>
+              <td>Near-zero mean with strong curvature tails</td>
+              <td>Exposes specialist–robustness trade-offs hidden by average curvature.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="results" class="container">
+      <h2 class="section-title">Key Findings</h2>
+      <p class="section-lead">
+        Curvature is not merely a post-hoc descriptor: it reorganizes model preferences, top-performing families, and GFM transfer behavior.
+      </p>
+      <div class="result-strip">
+        <div class="result"><strong>0.503</strong><span>Top-3 Spearman within-minus-cross regime gap on node classification.</span></div>
+        <div class="result"><strong>1/280</strong><span>Exact regrouping significance for the proposed curvature partition.</span></div>
+        <div class="result"><strong>43.95%</strong><span>Explained variance attributable to family-by-regime interaction.</span></div>
+        <div class="result"><strong>15.95</strong><span>Average 1-shot to 5-shot GFM gain on near-zero graphs.</span></div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 18px;">
+        <article class="card">
+          <h3>Observation 1 — coherent regime orders</h3>
+          <p>Datasets within the same curvature regime exhibit much more similar top-model preferences than datasets across regimes.</p>
+        </article>
+        <article class="card">
+          <h3>Observation 2 — inductive biases shift</h3>
+          <p>Euclidean methods dominate near-zero graphs, while mixed and adaptive Riemannian methods become strongest on negative-curvature graphs.</p>
+        </article>
+        <article class="card">
+          <h3>Observation 3 — GFMs remain geometry-conditioned</h3>
+          <p>Few-shot GFM performance does not collapse into a single universal ranking; leading methods differ across regimes.</p>
+        </article>
+        <article class="card">
+          <h3>Observation 4 — labels reveal scalability frontiers</h3>
+          <p>Additional labels help citation-like graphs more than structurally demanding regimes, exposing geometry-limited transfer.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="resources" class="container">
+      <h2 class="section-title">Resources</h2>
+      <p class="section-lead">Add your public links here after release. The buttons below are ready for GitHub Pages deployment.</p>
+      <div class="grid grid-3">
+        <a class="card" href="https://github.com/REPLACE_WITH_REPO" target="_blank" rel="noopener">
+          <div class="icon">💻</div>
+          <h3>Code</h3>
+          <p>Training, evaluation, curvature computation, and diagnostic scripts.</p>
+        </a>
+        <a class="card" href="https://huggingface.co/datasets/REPLACE_WITH_DATASET" target="_blank" rel="noopener">
+          <div class="icon">🤗</div>
+          <h3>Dataset splits</h3>
+          <p>Curvature-stratified data partitions and table-derived graph construction files.</p>
+        </a>
+        <a class="card" href="https://huggingface.co/REPLACE_WITH_MODELS" target="_blank" rel="noopener">
+          <div class="icon">🚀</div>
+          <h3>Models</h3>
+          <p>Optional checkpoints, logs, and precomputed features for reproducible comparison.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="citation" class="container">
+      <h2 class="section-title">Citation</h2>
+      <p class="section-lead">Please cite our work if you find CURVBENCH useful.</p>
+      <div class="bibtex">
+        <button class="copy-btn" onclick="copyBibtex()">Copy</button>
+        <pre id="bibtex">@misc{wang2026postgcndecaderevisited,
+  title  = {The Post-GCN Decade Revisited: Curvature-Stratified Evaluation of Relational Learning},
+  author = {Wang, Shuo and Wang, Xiangyu and Wang, Quanxin and Wu, Bolin and Wang, Bokui and Huang, Shunyang and Deng, Boyan and Liu, Haonan and Fang, Ruiyi and Xu, Zhenxiang and Wang, Boyu and Kang, Zhao},
+  year   = {2026},
+  note   = {Preprint}
+}</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Built for <strong>CURVBENCH</strong>. Replace placeholder URLs before publishing. Contact: <a href="mailto:runner21st@gmail.com">runner21st@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    function copyBibtex() {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const old = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = old, 1300);
+      });
+    }
+  </script>
+</body>
+</html>
