@@ -653,7 +653,7 @@
 
     <section id="benchmark" class="container">
       <span class="section-kicker">Benchmark</span>
-      <h2 class="section-title">14 datasets, 18 models, four geometric views.</h2>
+      <h2 class="section-title">Comprehensive experiments.</h2>
       <p class="section-lead">
         CURVBENCH spans natural graphs and table-derived graphs, then evaluates models through the lens of geometry-conditioned inductive bias rather than a single aggregate score.
       </p>
@@ -784,7 +784,7 @@
         </div>
       </details>
 
-      <details>
+      <details open>
         <summary>Dataset statistics: table-derived graphs</summary>
         <div class="details-body">
           <div class="table-scroll "><table class="compact"><thead><tr><th>Dataset</th><th>Domain</th><th>#Tables</th><th>#Rows</th><th>#Cols</th><th>#Nodes</th><th>#Edges</th><th>Avg Deg.</th><th>Features</th><th>Classes</th><th>Mean Curv.</th><th>Skewness</th></tr></thead><tbody><tr><td class="row-head">Carcinogenesis</td><td class="">Medicine</td><td class="">6</td><td class="">27,570</td><td class="">23</td><td class="">28,027</td><td class="">8,982</td><td class="">0.6410</td><td class="">300</td><td class="">3</td><td class="">0.00034</td><td class="">9.42658</td></tr><tr><td class="row-head">Hepatitis</td><td class="">Medicine</td><td class="">7</td><td class="">12,927</td><td class="">26</td><td class="">12,927</td><td class="">13,016</td><td class="">2.0138</td><td class="">300</td><td class="">3</td><td class="">0.00024</td><td class="">4.21239</td></tr><tr><td class="row-head">PTE</td><td class="">Medicine</td><td class="">38</td><td class="">29,762</td><td class="">76</td><td class="">29,850</td><td class="">18,805</td><td class="">1.2600</td><td class="">300</td><td class="">3</td><td class="">0.00031</td><td class="">9.74080</td></tr><tr><td class="row-head">Toxicology</td><td class="">Medicine</td><td class="">4</td><td class="">49,239</td><td class="">11</td><td class="">49,813</td><td class="">18,267</td><td class="">0.7334</td><td class="">300</td><td class="">3</td><td class="">0.00021</td><td class="">12.06911</td></tr><tr><td class="row-head">F1</td><td class="">Sports</td><td class="">9</td><td class="">97,606</td><td class="">77</td><td class="">97,606</td><td class="">192,560</td><td class="">3.9457</td><td class="">300</td><td class="">40</td><td class="">1.11301</td><td class="">-2.26907</td></tr></tbody></table></div>
@@ -800,7 +800,7 @@
         </div>
       </details>
 
-      <details>
+      <details open>
         <summary>Graph Foundation Models: 1-shot scenario</summary>
         <div class="details-body">
           <div class="table-scroll "><table class="compact"><thead><tr><th>Model</th><th>Cora</th><th>Citeseer</th><th>PubMed</th><th>Airport</th><th>Cornell</th><th>Actor</th><th>Disease</th><th>Telecom</th><th>CS_Phds</th></tr></thead><tbody><tr><td class="row-head">GCOPE</td><td class="">33.19±6.05</td><td class="">37.38±7.46</td><td class="">41.49±4.35</td><td class="">19.22±8.35</td><td class="">24.62±9.36</td><td class="best">24.30±1.85</td><td class="">73.08±12.69</td><td class="best">54.82±13.10</td><td class="best">26.21±2.11</td></tr><tr><td class="row-head">MDGPT</td><td class="">44.58±7.83</td><td class="">39.04±10.53</td><td class="best">53.36±10.72</td><td class="">18.28±17.07</td><td class="">29.26±6.27</td><td class="">20.01±4.33</td><td class="">52.42±9.43</td><td class="">36.56±12.55</td><td class="">25.29±2.30</td></tr><tr><td class="row-head">MDGFM</td><td class="">43.27±7.28</td><td class="best">41.20±6.31</td><td class="">51.52±9.34</td><td class="">18.70±5.03</td><td class="best">35.14±9.02</td><td class="">20.74±2.15</td><td class="">57.84±10.77</td><td class="oom">OOM</td><td class="">25.56±2.11</td></tr><tr><td class="row-head">SAMGPT</td><td class="best">44.64±14.94</td><td class="">36.03±8.41</td><td class="">45.24±8.45</td><td class="">19.12±9.20</td><td class="">33.84±8.54</td><td class="">19.72±5.88</td><td class="">60.28±11.04</td><td class="">45.12±13.49</td><td class="">25.36±6.92</td></tr><tr><td class="row-head">GraphGluing</td><td class="">32.22±1.33</td><td class="">28.48±6.59</td><td class="">45.90±4.70</td><td class="best">41.37±2.77</td><td class="">32.51±11.25</td><td class="">24.10±2.25</td><td class="best">79.67±0.18</td><td class="oom">OOM</td><td class="">26.15±2.45</td></tr><tr><td class="row-head">SA2GFM</td><td class="">40.25±8.05</td><td class="">29.98±7.81</td><td class="">45.79±8.90</td><td class="">25.63±5.95</td><td class="">20.99±5.45</td><td class="">18.53±2.09</td><td class="">51.12±13.39</td><td class="oom">OOM</td><td class="">25.92±2.75</td></tr></tbody></table></div>
@@ -808,7 +808,7 @@
         </div>
       </details>
 
-      <details>
+      <details open>
         <summary>Graph Foundation Models: 5-shot scenario</summary>
         <div class="details-body">
           <div class="table-scroll "><table class="compact"><thead><tr><th>Model</th><th>Cora</th><th>Citeseer</th><th>PubMed</th><th>Airport</th><th>Cornell</th><th>Actor</th><th>Disease</th><th>Telecom</th><th>CS_Phds</th></tr></thead><tbody><tr><td class="row-head">GCOPE</td><td class="">61.40±1.88</td><td class="">52.42±5.26</td><td class="">58.56±1.79</td><td class="">20.95±4.32</td><td class="best">68.03±4.33</td><td class="best">24.55±2.07</td><td class="">79.44±0.58</td><td class="best">72.16±8.37</td><td class="">26.70±1.95</td></tr><tr><td class="row-head">MDGPT</td><td class="">60.86±4.86</td><td class="best">58.68±6.93</td><td class="">59.86±6.83</td><td class="">22.78±10.44</td><td class="">44.98±7.18</td><td class="">21.28±4.21</td><td class="">54.68±9.71</td><td class="">38.74±9.13</td><td class="">26.86±2.27</td></tr><tr><td class="row-head">MDGFM</td><td class="best">64.93±4.43</td><td class="">58.10±4.55</td><td class="">65.65±5.30</td><td class="">19.92±3.88</td><td class="">60.10±7.78</td><td class="">21.12±1.67</td><td class="">63.55±8.69</td><td class="oom">OOM</td><td class="">26.81±2.42</td></tr><tr><td class="row-head">SAMGPT</td><td class="">64.62±9.89</td><td class="">53.76±5.70</td><td class="">56.16±7.27</td><td class="">21.28±6.74</td><td class="">52.24±6.18</td><td class="">19.92±6.24</td><td class="">68.32±9.88</td><td class="">58.56±11.62</td><td class="best">27.12±6.40</td></tr><tr><td class="row-head">GraphGluing</td><td class="">52.52±6.06</td><td class="">44.05±2.08</td><td class="best">66.14±1.71</td><td class="best">42.46±1.11</td><td class="">40.33±10.72</td><td class="">23.47±1.75</td><td class="best">80.42±0.73</td><td class="oom">OOM</td><td class="">26.63±1.67</td></tr><tr><td class="row-head">SA2GFM</td><td class="">50.91±6.57</td><td class="">38.25±4.18</td><td class="">53.40±8.94</td><td class="">25.95±9.77</td><td class="">22.83±7.34</td><td class="">19.35±2.96</td><td class="">56.77±10.84</td><td class="oom">OOM</td><td class="">26.05±1.87</td></tr></tbody></table></div>
@@ -816,7 +816,7 @@
         </div>
       </details>
 
-      <details>
+      <details open>
         <summary>Performance on table-derived graphs</summary>
         <div class="details-body">
           <div class="table-scroll "><table class="compact"><thead><tr><th>Model</th><th>Carcinogenesis</th><th>Hepatitis</th><th>PTE</th><th>Toxicology</th><th>F1</th></tr></thead><tbody><tr><td class="row-head">GCN</td><td class="">57.27±5.07</td><td class="">83.19±0.44</td><td class="">79.66±1.82</td><td class="">54.78±1.58</td><td class="">4.70±0.70</td></tr><tr><td class="row-head">GAT</td><td class="">60.30±4.59</td><td class="">79.80±1.29</td><td class="">78.33±3.11</td><td class="">52.75±1.29</td><td class="">4.25±0.14</td></tr><tr><td class="row-head">GraphSAGE</td><td class="">65.45±1.27</td><td class="">81.80±1.30</td><td class="">81.67±0.00</td><td class="best">55.07±1.02</td><td class="">4.10±0.14</td></tr><tr><td class="row-head">MLP</td><td class="">54.55±0.00</td><td class="">70.80±1.78</td><td class="">79.00±0.91</td><td class="best">55.07±0.20</td><td class="">3.96±0.40</td></tr><tr><td class="row-head">PCNet</td><td class="">53.03±2.14</td><td class="best">84.20±1.92</td><td class="">81.00±1.49</td><td class="">52.46±0.65</td><td class="">3.90±0.27</td></tr><tr><td class="row-head">HGNN</td><td class="">62.42±2.42</td><td class="">66.80±0.40</td><td class="">77.00±1.25</td><td class="">53.33±2.13</td><td class="">4.02±0.46</td></tr><tr><td class="row-head">HAT</td><td class="best">70.84±1.47</td><td class="">59.19±0.44</td><td class="best">85.66±3.02</td><td class="">40.57±4.09</td><td class="best">40.84±5.77</td></tr><tr><td class="row-head">HGCN</td><td class="">61.21±1.21</td><td class="">64.20±0.40</td><td class="">65.33±3.86</td><td class="">51.59±1.48</td><td class="">4.73±0.16</td></tr><tr><td class="row-head">HyboNet</td><td class="">43.63±1.76</td><td class="">67.59±5.38</td><td class="">43.33±5.55</td><td class="">44.92±5.55</td><td class="">4.11±0.21</td></tr><tr><td class="row-head">CUSP</td><td class="">57.57±7.66</td><td class="">80.40±1.20</td><td class="">51.66±10.90</td><td class="">54.87±0.57</td><td class="">5.04±0.25</td></tr><tr><td class="row-head">QGCN</td><td class="">63.33±2.42</td><td class="">67.20±2.23</td><td class="">55.33±1.25</td><td class="">53.04±2.35</td><td class="">4.47±0.50</td></tr><tr><td class="row-head">GraphMoRE</td><td class="">54.55±5.07</td><td class="">81.00±1.67</td><td class="">78.33±1.05</td><td class="">53.91±0.58</td><td class="">4.16±0.12</td></tr></tbody></table></div>
@@ -854,11 +854,14 @@
       <p class="section-lead">Please cite our work if you find the benchmark, splits, or diagnostic framework useful.</p>
       <div class="bibtex">
         <button class="copy-btn" onclick="copyBibtex()">Copy</button>
-        <pre id="bibtex">@misc{wang2026postgcndecaderevisited,
-  title  = {The Post-GCN Decade Revisited: Curvature-Stratified Evaluation of Relational Learning},
-  author = {Wang, Shuo and Wang, Xiangyu and Wang, Quanxin and Wu, Bolin and Wang, Bokui and Huang, Shunyang and Deng, Boyan and Liu, Haonan and Fang, Ruiyi and Xu, Zhenxiang and Wang, Boyu and Kang, Zhao},
-  year   = {2026},
-  note   = {Preprint}
+        <pre id="bibtex">@misc{wang2026postgcndecaderevisitedcurvaturestratified,
+      title={The Post-GCN Decade Revisited: Curvature-Stratified Evaluation of Relational Learning}, 
+      author={Shuo Wang and Xiangyu Wang and Quanxin Wang and Bailin Wu and Bokui Wang and Shunyang Huang and Boyan Deng and Haonan Liu and Ruiyi Fang and Zhenxiang Xu and Boyu Wang and Zhao Kang},
+      year={2026},
+      eprint={2606.06397},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2606.06397}, 
 }</pre>
       </div>
     </section>
